@@ -1,16 +1,20 @@
-# ✈️ BudgetWise Travel V2 — Smart AI Budget Trip Planner
+# ✈️ SmartTrip AI (v2.5) — Advanced Planning Orchestrator & Reviewer
 
-> A modern, client-side, intelligent travel itinerary and budget optimization engine built with vanilla web technologies.
+> A high-performance, client-side, dual-agent travel planning system built with pure vanilla web technologies.
 
-[![Version](https://img.shields.io/badge/version-2.0.0-blue.svg)](https://github.com/Shivambhatt2305/TRIP-PLANNER)
+[![Version](https://img.shields.io/badge/version-2.5.0-blue.svg)](https://github.com/Shivambhatt2305/TRIP-PLANNER)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-[![Pure Vanilla](https://img.shields.io/badge/tech-HTML5%20%7C%20CSS3%20%7C%20JS-orange.svg)](#technology-stack)
+[![Pure Vanilla](https://img.shields.io/badge/tech-HTML5%20%7C%20CSS3%20%7C%20Vanilla%20JS-orange.svg)](#technology-stack)
+[![No External APIs](https://img.shields.io/badge/APIs-None%20Required%20(Client--Side)-brightgreen.svg)](#technology-stack)
 
 ---
 
 ## 🌟 Overview
 
-**BudgetWise Travel V2** is an AI agent-driven trip planner designed to eliminate travel planning stress and unexpected budget overruns. By following a structured **6-step decision and optimization framework**, it produces practical, day-by-day itineraries that cluster activities geographically, balance schedules into morning/afternoon/evening sessions, map out travel distances, itemize costs across 6 granular categories, and automatically generate cheaper alternatives if the trip exceeds the traveler's budget.
+**SmartTrip AI v2.5** is an agentic, budget-constrained travel planning system. Unlike standard trip generators that hallucinate numbers or create impractical zigzagging itineraries, SmartTrip AI operates with a **Dual-Agent Architecture**:
+- **Role A — Planning Orchestrator:** Validates constraints, groups destinations into contiguous neighborhood clusters (anti-backtracking), and schedules morning/afternoon/evening sessions.
+- **Role B — Independent Reviewer:** An automated auditing engine that checks for constraint violations, daily time-envelope limits, route feasibility, and deterministic budget math.
+- **Deterministic 6-Category Cost Engine:** Itemizes costs programmatically without relying on LLM arithmetic.
 
 ---
 
