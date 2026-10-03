@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BudgetWise Travel V2 — Smart Budget Trip Planner</title>
+  <meta name="description" content="Smart AI Budget Trip Planner: day-by-day Morning/Afternoon/Evening itineraries, map routes, 6-category cost breakdown, and budget analysis — all in one." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="particles" id="particles"></div>
+
+  <!-- ===== HERO ===== -->
+  <header class="hero" id="hero">
+    <div class="hero-overlay"></div>
+    <nav class="navbar">
+      <div class="nav-logo">
+        <span class="logo-icon">✈️</span>
+        <span class="logo-text">BudgetWise<span class="logo-accent">Travel</span></span>
+        <span class="version-tag">V2</span>
+      </div>
+      <div class="nav-tagline">Smart Planning · Real Savings</div>
+    </nav>
+
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        AI-Powered Trip Planner · Version 2.0
+      </div>
+      <h1 class="hero-title">
+        Your Complete Trip,<br />
+        <span class="gradient-text">Planned to Perfection</span>
+      </h1>
+      <p class="hero-subtitle">
+        Tell us your destination, budget &amp; preferences — get a Morning/Afternoon/Evening itinerary, map routes, and full cost analysis in seconds.
+      </p>
+      <a href="#planner" class="cta-btn" id="start-planning-btn">
+        <span>Start Planning</span>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <div class="hero-stats">
+        <div class="stat-item"><span class="stat-number">6</span><span class="stat-label">Cost Categories</span></div>
+        <div class="stat-divider"></div>
+        <div class="stat-item"><span class="stat-number">3×</span><span class="stat-label">Daily Sessions</span></div>
+        <div class="stat-divider"></div>
+        <div class="stat-item"><span class="stat-number">12+</span><span class="stat-label">Destinations</span></div>
+        <div class="stat-divider"></div>
+        <div class="stat-item"><span class="stat-number">100%</span><span class="stat-label">Free to Use</span></div>
+      </div>
+    </div>
+    <div class="hero-scroll-indicator">
+      <span>Scroll to plan</span>
+      <div class="scroll-dot"></div>
+    </div>
+  </header>
+
+  <!-- ===== PLANNER FORM (V2) ===== -->
+  <section class="planner-section" id="planner">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Tell Us About Your Trip</h2>
+        <p class="section-subtitle">Fill in as many details as possible for a more personalised itinerary.</p>
+      </div>
+
+      <form class="planner-form glass-card" id="plannerForm" novalidate>
+
+        <!-- Step indicators -->
+        <div class="form-steps">
+          <div class="form-step active" id="fs-1"><span class="fs-num">1</span><span class="fs-label">Basics</span></div>
+          <div class="fs-line"></div>
+          <div class="form-step" id="fs-2"><span class="fs-num">2</span><span class="fs-label">Preferences</span></div>
+          <div class="fs-line"></div>
+          <div class="form-step" id="fs-3"><span class="fs-num">3</span><span class="fs-label">Generate</span></div>
+        </div>
+
+        <!-- ---- SECTION 1: Basic Info ---- -->
+        <div class="form-section" id="section-basics">
+          <div class="form-section-title">📍 Trip Basics</div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="origin" class="form-label"><span class="label-icon">🛫</span> Starting Location <span class="label-hint">(optional)</span></label>
+              <div class="input-wrapper">
+                <input type="text" id="origin" name="origin" class="form-input" placeholder="e.g., Mumbai, India" autocomplete="off" />
+                <div class="input-glow"></div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="destination" class="form-label"><span class="label-icon">📍</span> Destination <span class="required-star">*</span></label>
+              <div class="input-wrapper">
+                <input type="text" id="destination" name="destination" class="form-input" placeholder="e.g., Paris, France" required autocomplete="off" />
+                <div class="input-glow"></div>
+              </div>
+              <span class="field-error" id="destination-error"></span>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="startDate" class="form-label"><span class="label-icon">📅</span> Start Date <span class="label-hint">(optional)</span></label>
+              <div class="input-wrapper">
+                <input type="date" id="startDate" name="startDate" class="form-input" />
+                <div class="input-glow"></div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="days" class="form-label"><span class="label-icon">🗓️</span> Number of Days <span class="required-star">*</span></label>
+              <div class="input-wrapper">
+                <input type="number" id="days" name="days" class="form-input" placeholder="e.g., 5" min="1" max="60" required />
+                <div class="input-glow"></div>
+              </div>
+              <span class="field-error" id="days-error"></span>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="travelers" class="form-label"><span class="label-icon">👥</span> Travelers <span class="required-star">*</span></label>
+              <div class="input-wrapper">
+                <input type="number" id="travelers" name="travelers" class="form-input" placeholder="e.g., 2" min="1" max="20" required />
+                <div class="input-glow"></div>
+              </div>
+              <span class="field-error" id="travelers-error"></span>
+            </div>
+            <div class="form-group">
+              <label for="budget" class="form-label"><span class="label-icon">💰</span> Total Budget <span class="required-star">*</span></label>
+              <div class="input-wrapper input-with-prefix">
+                <select id="currency" name="currency" class="currency-select">
+                  <option value="USD">$ USD</option>
+                  <option value="EUR">€ EUR</option>
+                  <option value="GBP">£ GBP</option>
+                  <option value="INR">₹ INR</option>
+                  <option value="JPY">¥ JPY</option>
+                  <option value="AUD">A$ AUD</option>
+                  <option value="CAD">C$ CAD</option>
+                </select>
+                <input type="number" id="budget" name="budget" class="form-input" placeholder="e.g., 3000" min="1" required />
+                <div class="input-glow"></div>
+              </div>
+              <span class="field-error" id="budget-error"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ---- SECTION 2: Preferences ---- -->
+        <div class="form-section" id="section-prefs">
+          <div class="form-section-title">🎯 Preferences</div>
+
+          <!-- Transportation Preference -->
+          <div class="form-group full-width">
+            <label class="form-label"><span class="label-icon">🚌</span> Transportation Preference</label>
+            <div class="pref-chips" id="transportChips">
+              <button type="button" class="chip" data-value="flight">✈️ Flight</button>
+              <button type="button" class="chip" data-value="train">🚆 Train</button>
+              <button type="button" class="chip" data-value="bus">🚌 Bus</button>
+              <button type="button" class="chip" data-value="self-drive">🚗 Self-Drive</button>
+              <button type="button" class="chip" data-value="cruise">🚢 Cruise</button>
+              <button type="button" class="chip" data-value="any">🗺️ Any Mode</button>
+            </div>
+          </div>
+
+          <!-- Accommodation Preference -->
+          <div class="form-group full-width">
+            <label class="form-label"><span class="label-icon">🏨</span> Accommodation Preference</label>
+            <div class="style-options">
+              <label class="style-option" for="acc-hostel">
+                <input type="radio" name="accomPref" id="acc-hostel" value="hostel" />
+                <div class="style-card"><span class="style-emoji">🏕️</span><span class="style-name">Hostel</span><span class="style-desc">Dorm beds &amp; socials</span></div>
+              </label>
+              <label class="style-option" for="acc-hotel">
+                <input type="radio" name="accomPref" id="acc-hotel" value="hotel" checked />
+                <div class="style-card"><span class="style-emoji">🏨</span><span class="style-name">Hotel</span><span class="style-desc">Private rooms</span></div>
+              </label>
+              <label class="style-option" for="acc-airbnb">
+                <input type="radio" name="accomPref" id="acc-airbnb" value="airbnb" />
+                <div class="style-card"><span class="style-emoji">🏠</span><span class="style-name">Airbnb</span><span class="style-desc">Home away from home</span></div>
+              </label>
+              <label class="style-option" for="acc-resort">
+                <input type="radio" name="accomPref" id="acc-resort" value="resort" />
+                <div class="style-card"><span class="style-emoji">🏩</span><span class="style-name">Resort</span><span class="style-desc">All-inclusive luxury</span></div>
+              </label>
+            </div>
+          </div>
+
+          <!-- Travel Style -->
+          <div class="form-group full-width">
+            <label class="form-label"><span class="label-icon">🎒</span> Travel Style (Budget Level)</label>
+            <div class="style-options" style="grid-template-columns: repeat(3, 1fr);">
+              <label class="style-option" for="style-budget">
+                <input type="radio" name="travelStyle" id="style-budget" value="budget" />
+                <div class="style-card"><span class="style-emoji">💸</span><span class="style-name">Budget</span><span class="style-desc">Save every penny</span></div>
+              </label>
+              <label class="style-option" for="style-mid">
+                <input type="radio" name="travelStyle" id="style-mid" value="mid-range" checked />
+                <div class="style-card"><span class="style-emoji">⚖️</span><span class="style-name">Mid-Range</span><span class="style-desc">Best value</span></div>
+              </label>
+              <label class="style-option" for="style-luxury">
+                <input type="radio" name="travelStyle" id="style-luxury" value="luxury" />
+                <div class="style-card"><span class="style-emoji">💎</span><span class="style-name">Luxury</span><span class="style-desc">Premium experience</span></div>
+              </label>
+            </div>
+          </div>
+
+          <!-- Food Preference -->
+          <div class="form-group full-width">
+            <label class="form-label"><span class="label-icon">🍽️</span> Food Preference <span class="label-hint">(select all that apply)</span></label>
+            <div class="pref-chips" id="foodChips">
+              <button type="button" class="chip" data-value="local">🌍 Local Cuisine</button>
+              <button type="button" class="chip" data-value="vegetarian">🥗 Vegetarian</button>
+              <button type="button" class="chip" data-value="vegan">🌱 Vegan</button>
+              <button type="button" class="chip" data-value="halal">☪️ Halal</button>
+              <button type="button" class="chip" data-value="seafood">🦞 Seafood</button>
+              <button type="button" class="chip" data-value="street-food">🌮 Street Food</button>
+              <button type="button" class="chip" data-value="fine-dining">🍷 Fine Dining</button>
+              <button type="button" class="chip" data-value="any">🍴 No Preference</button>
+            </div>
+          </div>
+
+          <!-- Interests -->
+          <div class="form-group full-width">
+            <label class="form-label"><span class="label-icon">❤️</span> Travel Interests <span class="label-hint">(select all that apply)</span></label>
+            <div class="interest-chips" id="interestChips">
+              <button type="button" class="chip" data-value="culture">🏛️ Culture &amp; History</button>
+              <button type="button" class="chip" data-value="food">🍜 Food &amp; Cuisine</button>
+              <button type="button" class="chip" data-value="adventure">🧗 Adventure</button>
+              <button type="button" class="chip" data-value="nature">🌿 Nature &amp; Wildlife</button>
+              <button type="button" class="chip" data-value="shopping">🛍️ Shopping</button>
+              <button type="button" class="chip" data-value="beaches">🏖️ Beaches</button>
+              <button type="button" class="chip" data-value="nightlife">🌃 Nightlife</button>
+              <button type="button" class="chip" data-value="art">🎨 Art &amp; Museums</button>
+              <button type="button" class="chip" data-value="photography">📸 Photography</button>
+              <button type="button" class="chip" data-value="wellness">🧘 Wellness &amp; Spa</button>
+            </div>
+          </div>
+
+          <!-- Notes -->
+          <div class="form-group full-width">
+            <label for="notes" class="form-label"><span class="label-icon">📝</span> Additional Notes <span class="label-hint">(optional)</span></label>
+            <div class="input-wrapper">
+              <textarea id="notes" name="notes" class="form-input textarea-input" placeholder="e.g., traveling with kids, avoid crowded places, need wheelchair access, first time visiting..." rows="3"></textarea>
+              <div class="input-glow"></div>
+            </div>
+          </div>
+        </div>
+
+        <button type="submit" class="submit-btn" id="generateBtn">
+          <span class="btn-text">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+            Generate My Full Itinerary
+          </span>
+          <span class="btn-loader hidden">
+            <span class="spinner"></span>
+            Planning your trip...
+          </span>
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ===== LOADING OVERLAY ===== -->
+  <div class="loading-overlay hidden" id="loadingOverlay">
+    <div class="loading-card glass-card">
+      <div class="globe-spinner">🌍</div>
+      <h3 class="loading-title">Crafting Your Perfect Itinerary</h3>
+      <div class="loading-steps">
+        <div class="loading-step active" id="step-1"><span class="step-icon">🔍</span><span class="step-text">Step 1 — Extracting constraints...</span><span class="step-check hidden">✓</span></div>
+        <div class="loading-step" id="step-2"><span class="step-icon">📍</span><span class="step-text">Step 2 — Selecting places...</span><span class="step-check hidden">✓</span></div>
+        <div class="loading-step" id="step-3"><span class="step-icon">🗓️</span><span class="step-text">Step 3 — Building itinerary...</span><span class="step-check hidden">✓</span></div>
+        <div class="loading-step" id="step-4"><span class="step-icon">🗺️</span><span class="step-text">Step 4 — Mapping routes...</span><span class="step-check hidden">✓</span></div>
+        <div class="loading-step" id="step-5"><span class="step-icon">💰</span><span class="step-text">Step 5 — Estimating costs...</span><span class="step-check hidden">✓</span></div>
+        <div class="loading-step" id="step-6"><span class="step-icon">📋</span><span class="step-text">Step 6 — Finalising response...</span><span class="step-check hidden">✓</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== RESULTS SECTION ===== -->
+  <section class="results-section hidden" id="resultsSection">
+    <div class="container">
+
+      <!-- Trip Header + Actions -->
+      <div class="trip-header glass-card">
+        <div class="trip-meta">
+          <div class="trip-title-group">
+            <h2 class="trip-title" id="tripTitle">Your Adventure</h2>
+            <div class="trip-badges" id="tripBadges"></div>
+          </div>
+          <div class="trip-actions">
+            <button class="action-btn" id="printBtn">🖨️ Print Plan</button>
+            <button class="action-btn primary" id="replanBtn">↩ Replan</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 1 OUTPUT: Constraints Panel -->
+      <div class="step-panel glass-card" id="constraintsPanel">
+        <div class="step-panel-header">
+          <span class="step-badge">Step 1</span>
+          <h3 class="step-panel-title">📋 Extracted Constraints</h3>
+        </div>
+        <div class="constraints-grid" id="constraintsGrid"></div>
+      </div>
+
+      <!-- Budget Overview -->
+      <div class="budget-overview-card glass-card">
+        <div class="budget-overview" id="budgetOverview">
+          <div class="budget-card">
+            <span class="bc-icon">💸</span>
+            <div class="bc-content"><span class="bc-label">Estimated Total</span><span class="bc-value" id="totalCostDisplay">—</span></div>
+          </div>
+          <div class="budget-card">
+            <span class="bc-icon">🎯</span>
+            <div class="bc-content"><span class="bc-label">Your Budget</span><span class="bc-value" id="yourBudgetDisplay">—</span></div>
+          </div>
+          <div class="budget-card" id="bc-remaining">
+            <span class="bc-icon" id="remainingIcon">✅</span>
+            <div class="bc-content"><span class="bc-label" id="remainingLabel">Remaining</span><span class="bc-value" id="remainingDisplay">—</span></div>
+          </div>
+          <div class="budget-card">
+            <span class="bc-icon">📅</span>
+            <div class="bc-content"><span class="bc-label">Per Day / Person</span><span class="bc-value" id="perDayDisplay">—</span></div>
+          </div>
+        </div>
+        <div class="budget-bar-container">
+          <div class="budget-bar-labels"><span>Budget Used</span><span id="budgetPercent">0%</span></div>
+          <div class="budget-bar-track"><div class="budget-bar-fill" id="budgetBarFill"></div></div>
+        </div>
+        <div class="budget-status-msg" id="budgetStatusMsg"></div>
+      </div>
+
+      <!-- STEP 3 OUTPUT: Day-by-Day Itinerary -->
+      <div class="step-panel-header" style="margin-bottom: 20px;">
+        <span class="step-badge">Step 3</span>
+        <h3 class="step-panel-title">📅 Day-by-Day Itinerary</h3>
+        <div class="day-nav" id="dayNav"></div>
+      </div>
+      <div class="itinerary-container" id="itineraryContainer"></div>
+
+      <!-- STEP 4 OUTPUT: Map & Route -->
+      <div class="step-panel glass-card" id="mapPanel">
+        <div class="step-panel-header">
+          <span class="step-badge">Step 4</span>
+          <h3 class="step-panel-title">🗺️ Map &amp; Route Information</h3>
+        </div>
+        <div id="mapContent"></div>
+      </div>
+
+      <!-- STEP 5 OUTPUT: Cost Breakdown (6 categories) -->
+      <div class="step-panel glass-card" id="costPanel">
+        <div class="step-panel-header">
+          <span class="step-badge">Step 5</span>
+          <h3 class="step-panel-title">💹 Itemised Cost Breakdown</h3>
+        </div>
+        <div class="cost-breakdown-grid" id="costBreakdownGrid"></div>
+        <div class="cost-total-row" id="costTotalRow"></div>
+      </div>
+
+      <!-- STEP 6 OUTPUT: Assumptions + Tips -->
+      <div class="charts-row">
+        <div class="chart-card glass-card">
+          <div class="step-panel-header" style="margin-bottom:16px;">
+            <span class="step-badge">Step 6</span>
+            <h3 class="step-panel-title">📝 Assumptions Made</h3>
+          </div>
+          <ul class="assumptions-list" id="assumptionsList"></ul>
+        </div>
+        <div class="chart-card glass-card">
+          <h3 class="card-title">💡 Money-Saving Tips</h3>
+          <ul class="tips-list" id="tipsList"></ul>
+        </div>
+      </div>
+
+      <!-- Alternatives (if over budget) -->
+      <div class="alternatives-card glass-card hidden" id="alternativesCard">
+        <div class="alt-header">
+          <span class="alt-icon">⚠️</span>
+          <h3 class="alt-title">Over Budget — Suggested Cheaper Alternatives</h3>
+        </div>
+        <div class="alt-content" id="altContent"></div>
+      </div>
+
+      <!-- Final CTA -->
+      <div class="final-cta glass-card">
+        <h3>Ready to Book Your Trip?</h3>
+        <p>Your complete plan is ready! Print it or plan another trip.</p>
+        <div class="final-cta-btns">
+          <button class="cta-btn" id="printBtn2">🖨️ Save as PDF</button>
+          <button class="cta-btn secondary" id="replanBtn2">✏️ Plan Another Trip</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <span class="logo-text">✈️ BudgetWise<span class="logo-accent">Travel</span> <span class="version-tag">V2</span></span>
+      <p>Plan smart. Travel more. Spend less.</p>
+      <p class="footer-note">Cost estimates are approximate. Actual prices may vary by season, availability, and exchange rates.</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
